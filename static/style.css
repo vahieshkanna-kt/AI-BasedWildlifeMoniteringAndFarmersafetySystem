@@ -45,3 +45,21 @@ header h1 {
     font-size: 18px;
     line-height: 1.6;
 }
+input[type="file"] {
+    margin-top: 15px;
+    padding: 10px;
+}
+
+button {
+    background: #1b5e20;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #2e7d32;
+}
