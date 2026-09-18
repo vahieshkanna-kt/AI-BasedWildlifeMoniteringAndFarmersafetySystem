@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detection Result</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+    <h1>Wildlife Detection Result</h1>
+</header>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>AI Detection</h2>
+
+        {% if detections %}
+
+            {% for item in detections %}
+
+                <p>
+                    <strong>Detected:</strong>
+                    {{ item.animal }}
+                </p>
+
+                <p>
+                    <strong>Confidence:</strong>
+                    {{ item.confidence }}%
+                </p>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>No animal detected.</p>
+
+        {% endif %}
+
+        <br>
+
+        <a href="/">
+            <button>Back to Home</button>
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
