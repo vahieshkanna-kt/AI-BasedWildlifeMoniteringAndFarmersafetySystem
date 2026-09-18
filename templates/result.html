@@ -18,13 +18,52 @@
 </header>
 
 <div class="container">
+    <div class="alert-box">
+
+    {% if detections %}
+
+        <div class="warning-led"></div>
+
+        <h2>⚠️ Wildlife Alert</h2>
+
+        <p>Animal detected in the monitored area.</p>
+
+        <button onclick="playAlert()">🔊 Play Warning Sound</button>
+
+        <audio id="alertSound">
+            <source src="{{ url_for('static', filename='alert.mp3') }}" type="audio/mpeg">
+        </audio>
+
+    {% else %}
+
+        <div class="safe-led"></div>
+
+        <h2>✅ Area Safe</h2>
+
+        <p>No animal detected in the uploaded image.</p>
+
+    {% endif %}
+
+</div>
 
     <div class="card">
 
         <h2>AI Detection</h2>
 
         {% if detections %}
+        <p>Animal detected in the monitored area.</p>
+        <div class="safety-message">
+    <h3>⚠️ Farmer Safety</h3>
 
+    <p>
+        Move to a safe location and avoid approaching the animal.
+    </p>
+
+    <p>
+        Keep people away from the area and contact the
+        appropriate local wildlife authorities if necessary.
+    </p>
+</div>
             {% for item in detections %}
 
                 <p>
@@ -56,4 +95,10 @@
 </div>
 
 </body>
+<script>
+function playAlert() {
+    const sound = document.getElementById("alertSound");
+    sound.play();
+}
+</script>
 </html>
