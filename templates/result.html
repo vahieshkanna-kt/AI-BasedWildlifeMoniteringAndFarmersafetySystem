@@ -1,59 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Detection Result</title>
-
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+    <title>Detection Results - AgriGuard AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+<body class="bg-light">
+    <nav class="navbar navbar-dark bg-success shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">🌿 AgriGuard AI</a>
+            <a href="/" class="btn btn-outline-light btn-sm">Back to Dashboard</a>
+        </div>
+    </nav>
 
-<body>
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-dark text-white">Detection Summary</div>
+                    <div class="card-body">
+                        <h3 class="text-success mb-3">Detected: {{ animal }}</h3>
+                        <p class="fs-5"><strong>Confidence Score:</strong> {{ confidence }}%</p>
+                        
+                        {% if animal != "No Animal Detected" %}
+                            <div class="alert alert-danger mt-3">
+                                <h5>🚨 WARNING: Wildlife Alert!</h5>
+                                <p class="mb-1">Animal presence confirmed in the agricultural zone.</p>
+                                <p class="mb-0 text-dark fw-bold">📱 Mobile SMS Alert has been dispatched via Twilio to the registered farmer's phone!</p>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-success mt-3">
+                                <h5>✅ All Clear</h5>
+                                <p class="mb-0">No significant wildlife threats were identified in this frame. No SMS dispatched.</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
 
-<header>
-    <h1>Wildlife Detection Result</h1>
-</header>
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-success text-white">Processed Image with Bounding Box</div>
+                    <div class="card-body text-center">
+                        <img src="{{ url_for('static', filename='processed/' + processed) }}" class="img-fluid rounded border" alt="Processed Image">
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div class="container">
-
-    <div class="card">
-
-        <h2>AI Detection</h2>
-
-        {% if detections %}
-
-            {% for item in detections %}
-
-                <p>
-                    <strong>Detected:</strong>
-                    {{ item.animal }}
-                </p>
-
-                <p>
-                    <strong>Confidence:</strong>
-                    {{ item.confidence }}%
-                </p>
-
-            {% endfor %}
-
-        {% else %}
-
-            <p>No animal detected.</p>
-
-        {% endif %}
-
-        <br>
-
-        <a href="/">
-            <button>Back to Home</button>
-        </a>
-
+        <div class="text-center mt-3">
+            <a href="/" class="btn btn-success btn-lg">Analyze Another Image</a>
+            <a href="/history" class="btn btn-outline-secondary btn-lg ms-2">View History</a>
+        </div>
     </div>
-
-</div>
-
 </body>
 </html>

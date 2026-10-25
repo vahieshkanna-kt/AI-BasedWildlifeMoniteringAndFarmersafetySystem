@@ -1,65 +1,21 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f8f4;
-    color: #222;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
 }
 
-header {
-    background: #1b5e20;
-    color: white;
-    text-align: center;
-    padding: 30px 15px;
-}
-
-header h1 {
-    font-size: 32px;
-    margin-bottom: 10px;
-}
-
-.container {
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 20px;
+.navbar-brand {
+    font-size: 1.25rem;
 }
 
 .card {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.card h2 {
-    color: #1b5e20;
-    margin-bottom: 15px;
-}
-
-.card p {
-    font-size: 18px;
-    line-height: 1.6;
-}
-input[type="file"] {
-    margin-top: 15px;
-    padding: 10px;
-}
-
-button {
-    background: #1b5e20;
-    color: white;
-    border: none;
-    padding: 12px 25px;
     border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
+    transition: transform 0.2s ease-in-out;
 }
 
-button:hover {
-    background: #2e7d32;
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.table img {
+    border: 1px solid #dee2e6;
 }

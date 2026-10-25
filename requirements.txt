@@ -1,0 +1,5 @@
+flask==3.0.2
+ultralytics==8.1.0
+opencv-python==4.9.0.80
+pillow
+twilio==9.0.0

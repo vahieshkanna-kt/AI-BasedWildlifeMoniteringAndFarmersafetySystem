@@ -3,53 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>AI Wildlife Monitoring</title>
-
+    <title>AI Wildlife Monitoring & Farmer Safety</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
-
-    <header>
-        <h1>AI-Based Wildlife Monitoring</h1>
-        <p>Farmer Safety and Crop Protection System</p>
-    </header>
-
-    <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm">
         <div class="container">
+            <a class="navbar-brand fw-bold" href="/">🌿 AgriGuard AI</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="/">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/history">History</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about">About Project</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <div class="card">
-        <h2>Wildlife Detection</h2>
+    <div class="container my-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 
-        <p>
-            Upload an image to detect wildlife using AI.
-        </p>
-
-        <form action="/detect" method="POST" enctype="multipart/form-data">
-
-            <input type="file" name="image" accept="image/*" required>
-
-            <br><br>
-
-            <button type="submit">Detect Animal</button>
-
-        </form>
-    </div>
-
-</div>
-
-        <div class="card">
-            <h2>Welcome</h2>
-
-            <p>
-                This system uses Artificial Intelligence
-                to monitor wildlife activity and provide
-                safety alerts for farmers.
-            </p>
+        <div class="p-5 mb-4 bg-light rounded-3 shadow-sm border">
+            <div class="container-fluid py-2">
+                <h1 class="display-5 fw-bold text-success">AI-Based Wildlife Monitoring</h1>
+                <p class="col-md-8 fs-5 text-secondary">Protecting crops and ensuring farmer safety through computer vision and instant SMS alerts.</p>
+            </div>
         </div>
 
+        <div class="row g-4 mb-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm border-success h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-success">📊 System Metrics</h5>
+                        <p class="mb-1"><strong>Total Analyzed:</strong> {{ total_analyzed }}</p>
+                        <p class="mb-0"><strong>Wildlife Detections:</strong> {{ total_detections }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm border-warning h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-warning text-dark">💡 Hardware & SMS Status</h5>
+                        <p class="mb-1"><strong>Sensor Node:</strong> <span class="badge bg-success">Active / Online</span></p>
+                        <p class="mb-1"><strong>Virtual Buzzer:</strong> <span class="badge bg-secondary" id="virtualLed">Standby</span></p>
+                        <p class="mb-0"><strong>Twilio SMS Gateway:</strong> <span class="badge bg-primary">Connected</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm border-info h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-info">🚀 Quick Upload</h5>
+                        <p class="small text-muted mb-2">Upload a field capture image to test AI detection and mobile alerts.</p>
+                        <a href="#uploadSection" class="btn btn-outline-success btn-sm">Start Detection</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mb-4" id="uploadSection">
+            <div class="card-header bg-success text-white fw-bold">Upload Field Image for Wildlife Detection</div>
+            <div class="card-body">
+                <form action="/detect" method="POST" enctype="multipart/form-data" id="uploadForm">
+                    <div class="mb-3">
+                        <label for="file" class="form-label">Select Image (PNG, JPG, JPEG):</label>
+                        <input class="form-control" type="file" id="file" name="file" accept=".png, .jpg, .jpeg" required>
+                    </div>
+                    <button type="submit" class="btn btn-success" id="detectBtn">
+                        <span class="spinner-border spinner-border-sm d-none" id="loadingSpinner" role="status"></span>
+                        Detect Animal
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card border-danger shadow-sm mb-4">
+            <div class="card-header bg-danger text-white fw-bold">⚠️ Farmer Safety Protocol</div>
+            <div class="card-body">
+                <ul>
+                    <li>Immediately move to a safe, enclosed location or elevated structure if large wildlife is detected.</li>
+                    <li>Do not approach, chase, throw objects at, or provoke wild animals.</li>
+                    <li>Notify local forest rangers or wildlife authorities immediately upon receiving an SMS alert.</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

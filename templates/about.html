@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About - AgriGuard AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-dark bg-success shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">🌿 AgriGuard AI</a>
+            <a href="/" class="btn btn-outline-light btn-sm">Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="card shadow-sm p-4">
+            <h2 class="text-success mb-3">About the Project</h2>
+            <p>The <strong>AI-Based Wildlife Monitoring and Farmer Safety System</strong> is a full-stack prototype designed to bridge technology and agriculture. It utilizes computer vision (YOLOv8) to assist farmers in monitoring fields for wildlife intrusion and dispatches real-time SMS alerts directly to mobile phones.</p>
+            
+            <h4 class="mt-4 text-success">Technology Stack</h4>
+            <ul>
+                <li><strong>Frontend:</strong> HTML5, CSS3, Bootstrap 5, JavaScript</li>
+                <li><strong>Backend:</strong> Python, Flask</li>
+                <li><strong>AI Model:</strong> Ultralytics YOLOv8 (Pretrained COCO)</li>
+                <li><strong>Image Processing:</strong> OpenCV</li>
+                <li><strong>Database:</strong> SQLite</li>
+                <li><strong>Mobile Notification Gateway:</strong> Twilio REST API</li>
+            </ul>
+
+            <h4 class="mt-4 text-success">Limitations & Future Scope</h4>
+            <p>The current prototype uses a pretrained YOLO model trained on COCO classes (elephants, bears, birds, etc.). Specific regional wildlife such as wild boars or certain deer species require custom dataset fine-tuning. Future enhancements will integrate live CCTV video streams, edge devices like Raspberry Pi, and sound deterrence speakers.</p>
+        </div>
+    </div>
+</body>
+</html>
